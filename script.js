@@ -2,13 +2,12 @@
 let display = document.getElementById("display"); // selects id display and gives it an variebel name display.
 display.type='text'
 
-const buffer = [];
+//const value1 = [];
 let firstNum;
 let secondNum;
 let opName;
 let value1= [];
-value1[0]=0;
-value1[1]=0;
+
 
     document.querySelectorAll(".key").forEach(function(el) {
       el.onclick = function() {
@@ -53,21 +52,21 @@ value1[1]=0;
            
         firstNum =display.value;
 
-        if(buffer && buffer.length){
-          buffer.push({ value: firstNum });
+        if(value1 && value1.length){
+          value1.push({ value: firstNum });
 
-          const result = evaluate(buffer);
+          const result = evaluate(value1);
   
-          buffer.push({ value: result });
-          buffer.push({ value: elementId });
+          value1.push({ value: result });
+          value1.push({ value: elementId });
   
           display.value = "";
 
         }
 
         else {
-          buffer.push({ value: firstNum });
-          buffer.push({ value: elementId });
+          value1.push({ value: firstNum });
+          value1.push({ value: elementId });
           display.value = "";
         }
 
@@ -75,21 +74,21 @@ value1[1]=0;
       }
 
       if(elementId ==='equal'){
-        if (buffer && buffer.length) {
-          buffer.push({ value: parseFloat(display.value) });
-          display.value = evaluate(buffer);
+        if (value1 && value1.length) {
+          value1.push({ value: parseFloat(display.value) });
+          display.value = evaluate(value1);
         }}
 
     }
 
-      const evaluate = buffer => {
-        const secondOperand = buffer.pop().value;
-        const operator = buffer.pop().value;
-        const firstOperand = buffer.pop().value;
+      const evaluate = value1 => {
+        const secondOperand = value1.pop().value;
+        const operator = value1.pop().value;
+        const firstOperand = value1.pop().value;
       
         switch (operator) {
           case "add":
-            return firstOperand + secondOperand;
+            return parseFloat(firstOperand) + parseFloat(secondOperand);
           
             case "subtract":
             return firstOperand - secondOperand;
