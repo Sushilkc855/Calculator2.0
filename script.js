@@ -7,6 +7,7 @@ let firstNum;
 let secondNum;
 let opName;
 let value1= [];
+let maxNumLength =25;
 
 
     document.querySelectorAll(".key").forEach(function(el) {
@@ -15,12 +16,20 @@ let value1= [];
         elementId= el.id;
 
         if(!isNaN(Number.parseInt(elementId))){ // is not not. 
-          display.value = display.value !== '0' ? display.value + el.id : el.id ;
+          if(display.value.length >= maxNumLength){
+            alert('Too many numbers, my brain hurts')
+          }
+          else{
+            display.value = display.value !== '0' ? display.value + el.id : el.id ;
+          }
+          
+          font();
         }
 
 
         else if(elementId==='clear') {
           display.value=0;
+          display.style.fontSize = "28px";
         }
 
         else if(elementId==='percent') {
@@ -105,6 +114,9 @@ let value1= [];
       }
 
 
+
+
+
       function font() {
         for (let index = 0; index < display.value.length; index++) {
           if(display.value.length === 14) {
@@ -115,15 +127,6 @@ let value1= [];
           }
           else if (display.value.length === 22) {
             display.style.fontSize = "16px"
-          }
-          else if (display.value.length === 26) {
-            display.style.fontSize = "12px"
-          }
-          else if (display.value.length === 36) {
-            display.style.fontSize = "10px"
-          }
-          else if (display.value.length === 42) {
-            display.style.fontSize = "8px"
           }
         }
       }
