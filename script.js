@@ -1,8 +1,10 @@
+document.getElementById('display').readOnly = true;
 
 let display = document.getElementById("display"); // selects id display and gives it an variebel name display.
 display.type='text'
 
 //const value1 = [];
+let elementId;
 let firstNum;
 let secondNum;
 let opName;
@@ -10,20 +12,20 @@ let value1= [];
 let maxNumLength =25;
 
 
-    document.querySelectorAll(".key").forEach(function(el) {
-      el.onclick = function() {
+    document.querySelectorAll(".key").forEach(function(el) { // slectes everything with classname key and loops through them. And slects all the element with class name key. 
+      console.log(el)
+      el.onclick = function() { // An onclick event whenever you click the element namely buttons. 
         console.log(this.id)
-        elementId= el.id;
+      elementId= el.id;  // I pass the el.id to elementID
 
-        if(!isNaN(Number.parseInt(elementId))){ // is not not. 
-          if(display.value.length >= maxNumLength){
+        if(!isNaN(Number.parseInt(elementId))){ // if it is not not a num. Basiclly if it is a number this goes through.   
+          if(display.value.length >= maxNumLength){   // The calculator display can only hold maximun 25 num. 
             alert('Too many numbers, my brain hurts')
           }
           else{
-            display.value = display.value !== '0' ? display.value + el.id : el.id ;
+            display.value = display.value !== '0' ? display.value + el.id : el.id ; // This shows el.id(numbers that you pressed on the calculator. )
           }
-          
-          font();
+          font(); // for the fontsize of the numbers. 
         }
 
 
@@ -41,7 +43,7 @@ let maxNumLength =25;
         }
         
         else if (elementId==='dot'){
-          if(!display.value.includes('.')){
+          if(!display.value.includes('.')){ // if the caculator display does not include a dot. Then only you can put a dot. 
             display.value +='.';
           }
           
@@ -49,28 +51,26 @@ let maxNumLength =25;
           
       
         else{
-        operators();
+        operators(); // If none of the above are true- This function happens. 
         }
-
-
       }
     })
     
+
+
     function operators(){
       if (elementId==='add' || elementId==='subtract' || elementId==='multiply' || elementId==='divide' ){
            
-        firstNum =display.value;
+        firstNum =display.value; // if the user presses an operator. The display value becoms the first num. 
 
-        if(value1 && value1.length){
+        if(value1 && value1.length){ // If there is something in the array = true. 
           value1.push({ value: firstNum });
 
           const result = evaluate(value1);
-  
+
           value1.push({ value: result });
           value1.push({ value: elementId });
-  
           display.value = "";
-
         }
 
         else {
@@ -78,17 +78,16 @@ let maxNumLength =25;
           value1.push({ value: elementId });
           display.value = "";
         }
-
-      
-      }
+       }
 
       if(elementId ==='equal'){
         if (value1 && value1.length) {
           value1.push({ value: parseFloat(display.value) });
           display.value = evaluate(value1);
         }}
-
     }
+
+
 
       const evaluate = value1 => {
         const secondOperand = value1.pop().value;
@@ -114,18 +113,16 @@ let maxNumLength =25;
       }
 
 
-
-
-
-      function font() {
-        for (let index = 0; index < display.value.length; index++) {
-          if(display.value.length === 14) {
+      
+      function font() {  // for the fontsize. 
+        for (let index = 0; index < display.value.length; index++) { // if the display has more then 0 numbers this loops.   
+          if(display.value.length === 14) {  // if true the font size changes to fit the display. 
             display.style.fontSize = "24px"
           }
-          else if (display.value.length === 18) {
+          else if (display.value.length === 18) { // if true the font size changes to fit the display. 
             display.style.fontSize = "20px"
           }
-          else if (display.value.length === 22) {
+          else if (display.value.length === 22) {   // if true the font size changes to fit the display. 
             display.style.fontSize = "16px"
           }
         }
