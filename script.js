@@ -17,7 +17,7 @@ let maxNumLength =25;
       el.onclick = function() { // An onclick event whenever you click the element namely buttons. 
         console.log(this.id)
       elementId= el.id;  // I pass the el.id to elementID
-
+      console.log(value1)
         if(!isNaN(Number.parseInt(elementId))){ // if it is not not a num. Basiclly if it is a number this goes through.   
           if(display.value.length >= maxNumLength){   // The calculator display can only hold maximun 25 num. 
             alert('Too many numbers, my brain hurts')
@@ -63,24 +63,24 @@ let maxNumLength =25;
            
         firstNum =display.value; // if the user presses an operator. The display value becoms the first num. 
 
-        if(value1 && value1.length){ // If there is something in the array = true. 
-          value1.push({ value: firstNum });
+        if(value1 && value1.length){ // If there is a number in the array and an opration = true. 
+          value1.push({ value: firstNum }); // we are gonna put the current in the value 
+          const result = evaluate(value1); // and this evaluate function is gonna happen. And return the result. 
+          value1.push({ value: result });// We gonna put the result in the array.
+          value1.push({ value: elementId }); // We are also putting the operator 
+                      //in the array incase they calculate with multiple operators. 
 
-          const result = evaluate(value1);
-
-          value1.push({ value: result });
-          value1.push({ value: elementId });
-          display.value = "";
+          display.value = ""; // set the display.value to emty.
         }
 
         else {
-          value1.push({ value: firstNum });
+          value1.push({ value: firstNum }); // if none of the above is true. We are gonna put the first num and the operator in the array. 
           value1.push({ value: elementId });
           display.value = "";
         }
        }
 
-      if(elementId ==='equal'){
+      if(elementId ==='equal'){ 
         if (value1 && value1.length) {
           value1.push({ value: parseFloat(display.value) });
           display.value = evaluate(value1);
@@ -90,9 +90,9 @@ let maxNumLength =25;
 
 
       const evaluate = value1 => {
-        const secondOperand = value1.pop().value;
-        const operator = value1.pop().value;
-        const firstOperand = value1.pop().value;
+        const secondOperand = value1.pop().value; // takes the last num from the array
+        const operator = value1.pop().value; // the last is already taken so it takes the secondlast. 
+        const firstOperand = value1.pop().value; // and so on 
       
         switch (operator) {
           case "add":
